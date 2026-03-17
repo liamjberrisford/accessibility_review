@@ -1,0 +1,2 @@
+markdown>=3.6
+pypdf>=4.2.0

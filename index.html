@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Accessibility Auditor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Client-side Accessibility Toolkit</p>
+        <h1>Accessibility Reporter</h1>
+        <p class="hero-copy">
+          Upload files or a <code>.zip</code>. Your files are processed in this browser tab and are not uploaded by
+          this app.
+        </p>
+        <div class="hero-tags">
+          <span>File processing stays local</span>
+          <span>Zip supported</span>
+          <span>Export JSON/Markdown</span>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="panel uploader">
+          <h2>Upload Inputs</h2>
+          <label for="fileInput" class="upload-label">Choose files to audit</label>
+          <input id="fileInput" type="file" multiple />
+          <p class="hint">
+            Supported: html, htm, md, markdown, txt, csv, json, xml, yml, yaml, ipynb, docx, pdf, zip
+          </p>
+          <p class="hint">PDF files run a dedicated in-browser heuristic accessibility check.</p>
+          <p class="hint">
+            Note: the page loads some libraries/fonts from CDNs, but your uploaded file contents are handled locally in
+            your browser.
+          </p>
+          <p class="hint">
+            Prefer a fully local workflow? See the <a href="./README.md">README</a> for the local Python +
+            <code>pa11y-ci</code> option.
+          </p>
+          <div class="actions">
+            <button id="runAudit" disabled>Run Audit</button>
+            <button id="clearAll" class="ghost">Clear</button>
+            <button id="downloadJson" class="ghost" disabled>Download JSON</button>
+            <button id="downloadMd" class="ghost" disabled>Download Markdown</button>
+          </div>
+        </section>
+
+        <section class="panel panel-tight">
+          <h2>Queued Files</h2>
+          <ul id="fileList" class="list"></ul>
+        </section>
+      </div>
+
+      <section class="panel panel-results">
+        <h2>Audit Results</h2>
+        <div id="summary" class="summary">No report yet.</div>
+        <div id="results" class="results"></div>
+      </section>
+
+      <section class="panel support">
+        <h2>Found an issue?</h2>
+        <p>
+          Email <a href="mailto:l.berrisford3@exeter.ac.uk">l.berrisford3@exeter.ac.uk</a> or open a GitHub Issue in
+          this repository.
+        </p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
